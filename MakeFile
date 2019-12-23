@@ -1,76 +1,31 @@
+
 FLAGS= -Wall -g
 
 CC=gcc
 
+all: sort txtSearch
 
+sort: mainSort.o sort.o
+	 $(CC) $(FLAGS) -o sort mainSort.o sort.o
 
-all: isort txtfind
+ txtSearch: searchMain.o txtSearch.o
+	$(CC) $(FLAGS) -o txtSearch searchMain.o txtSearch.o
 
+mainSort.o: mainSort.c
+ 	 $(CC) $(FLAGS) -c mainSort.c
+	 
+ searchMain.o: searchMain.c
+ 	 $(CC) $(FLAGS) -c searchMain.c
+	 
+ sort.o: sort.c sort.h
+ 	$(CC) $(FLAGS) -c sort.c
 
-isort: main.o isort.o
-	 $(CC) $(FLAGS) -o isort main.o isort.o
-
-txtfind: maintxt.o txtfind.o
-	$(CC) $(FLAGS) -o txtfind maintxt.o txtfind.o
-
-main.o: main.c
-	 $(CC) $(FLAGS) -c main.c
-
-maintxt.o: maintxt.c
-	 $(CC) $(FLAGS) -c maintxt.c
-
-isort.o: isort.c isort.h
-	$(CC) $(FLAGS) -c isort.c
-
-txtfind.o: txtfind.c txtfind.h
-	$(CC) $(FLAGS) -c txtfind.c
+ txtSearch.o: txtSearch.c txtSearch.h
+ 	$(CC) $(FLAGS) -c txtSearch.c
 
 
 
-.PHONY:	clean all
+ .PHONY:	clean all
 
-clean:
-	rm -f *.o isort txtfind
-
-
-
-
-
-
-
-
-
-
-
-
-# FLAGS= -Wall -g
-
-# CC=gcc
-
-# all: sort txtSearch
-
-
-# sort: mainSort.o sort.o
-# 	 $(CC) $(FLAGS) -o sort mainSort.o sort.o
-
-# txtSearch: searchMain.o txtSearch.o
-# 	$(CC) $(FLAGS) -o txtSearch searchMain.o txtSearch.o
-
-# mainSort.o: mainSort.c
-# 	 $(CC) $(FLAGS) -c mainSort.c
-
-# searchMain.o: searchMain.c
-# 	 $(CC) $(FLAGS) -c searchMain.c
-
-# sort.o: sort.c sort.h
-# 	$(CC) $(FLAGS) -c sort.c
-
-# txtSearch.o: txtSearch.c txtSearch.h
-# 	$(CC) $(FLAGS) -c txtSearch.c
-
-
-
-# .PHONY:	clean all
-
-# clean:
-# 	rm -f *.o sort txtSearch
+ clean:
+rm -f *.o sort txtSearch
